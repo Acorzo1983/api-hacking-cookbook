@@ -12,13 +12,13 @@ Evasive techniques in API hacking are designed to bypass or fool security measur
 - **Advanced Request Tweaking**: Modifying request headers, using string terminators or URL encoding, and strategically crafting payloads to bypass filters or WAF rules.
 
 **Example Using Advanced Request Tweaking**:
-\`\`\`http
+```http
 POST /api/updateProfile HTTP/1.1
 Host: example.com
 Content-Type: application/json
 
 {"username":"admin\0", "data":"new data"}
-\`\`\`
+```
 This payload uses a null byte to attempt to terminate input processing prematurely, potentially bypassing security filters.
 
 ### Automating Evasion with Burp Suite
@@ -34,18 +34,18 @@ Rate limit testing is crucial for identifying how an API enforces usage limits a
 - **Manipulation of Rate Limiting Headers**: Modifying HTTP headers such as \`X-Forwarded-For\` to simulate requests from different IP addresses.
 
 **Example of Manipulating Rate Limiting Headers**:
-\`\`\`http
+```http
 GET /api/resource HTTP/1.1
 Host: target.com
 X-Forwarded-For: 192.168.1.1
-\`\`\`
+```
 This request uses the \`X-Forwarded-For\` header to simulate coming from a different IP address, potentially bypassing IP-based rate limiting.
 
 **Path Bypass Example**:
 Some APIs may not enforce rate limits uniformly across all endpoints or paths. By slightly modifying the endpoint path, an attacker might bypass the rate limit.
-\`\`\`http
+```http
 POST /api/resource%00
-\`\`\`
+```
 Using encoding or appending characters like \`%00\` (null byte) can help test how different paths affect rate limiting.
 
 ### Conclusion
